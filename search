@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Script for searching files and folders
+
+HELP="Usage: search file [path]"
+MORE="Example: search "*.log" /var/log \ndefault path is current working directory."
+
+# Check first parameter
+if [ -z "$1" ]; then
+    echo -e "$HELP"
+    exit
+elif [ "$1" == "-h" ]; then
+    echo -e "$HELP"
+    echo -e "$MORE"
+    exit
+elif [ "$1" == "--help" ]; then
+    echo -e "$HELP"
+    echo -e "$MORE"
+    exit
+fi
+
+
+# Search path
+if [ -z "$2" ]; then
+    TARGET=.
+else
+    TARGET="$2"
+fi
+
+find "$TARGET" -name "$1" |& grep -v "find: "
